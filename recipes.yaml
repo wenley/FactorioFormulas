@@ -1,0 +1,257 @@
+# Format:
+# inputs: nested hash of item_name: amount
+# amount: amount produced; defaults to 1
+# time: ticks to make (1 tick = 0.5 sec); defaults to 1
+
+# Intermediates
+gear:
+  inputs:
+    iron: 2
+coil:
+  inputs:
+    copper: 1
+  amount: 2
+pipe:
+  inputs:
+    iron: 1
+steel:
+  inputs:
+    iron: 5
+  time: 17
+circuit:
+  inputs:
+    iron: 1
+    coil: 3
+advanced_circuit:
+  inputs:
+    plastic: 2
+    circuit: 2
+    coil: 4
+  time: 16
+processing_unit:
+  inputs:
+    circuit: 20
+    advanced_circuit: 2
+    acid: 0.5
+  time: 30
+
+# Placeholder to indicate number of pumps and amount of water consumed separately
+# One "water building" is a pump
+# Which processes 30 water units per tick
+water:
+  inputs:
+    water_units: 30
+  amount: 30
+
+# Engines
+engine:
+  inputs:
+    pipe: 2
+    steel: 1
+    gear: 1
+  time: 40
+electric_engine:
+  inputs:
+    engine: 1
+    circuit: 2
+    lube: 2
+  time: 40
+robo_frame:
+  inputs:
+    electric_engine: 1
+    steel: 1
+    circuit: 3
+    battery: 2
+  time: 40
+logistic_robot:
+  inputs:
+    robo_frame: 1
+    advanced_circuit: 2
+construction_robot:
+  inputs:
+    robo_frame: 1
+    advanced_circuit: 2
+roboport:
+  inputs:
+    steel: 45
+    gear: 45
+    advanced_circuit: 45
+  time: 30
+
+# Science Packs
+science_1:
+  inputs:
+    copper: 1
+    gear: 1
+  time: 10
+science_2:
+  inputs:
+    transporter: 1
+    inserter: 1
+  time: 12
+science_3:
+  inputs:
+    smart_inserter: 1
+    steel: 1
+    advanced_circuit: 1
+    battery: 1
+  time: 24
+
+# Petroleum Products
+sulfur:
+  inputs:
+    water: 3
+    pgas: 3
+  amount: 2
+  time: 2
+acid:
+  inputs:
+    sulfur: 5
+    water: 10
+    iron: 1
+  time: 2
+  amount: 5
+battery:
+  inputs:
+    acid: 2
+    iron: 1
+    copper: 1
+  time: 10
+plastic:
+  inputs:
+    coal: 1
+    pgas: 3
+  time: 2
+  amount: 2
+
+# Logistics
+transporter:
+  inputs:
+    iron: 1
+    gear: 1
+inserter:
+  inputs:
+    iron: 1
+    circuit: 1
+    gear: 1
+fast_inserter:
+  inputs:
+    inserter: 1
+    iron: 2
+    circuit: 2
+smart_inserter:
+  inputs:
+    fast_inserter: 1
+    circuit: 4
+
+# Storage
+steel_chest:
+  inputs:
+    steel: 8
+smart_chest:
+  inputs:
+    steel_chest: 1
+    circuit: 3
+active_provider_chest:
+  inputs:
+    smart_chest: 1
+    advanced_circuit: 1
+passive_provider_chest:
+  inputs:
+    smart_chest: 1
+    advanced_circuit: 1
+requester_chest:
+  inputs:
+    smart_chest: 1
+    advanced_circuit: 1
+storage_chest:
+  inputs:
+    smart_chest: 1
+    advanced_circuit: 1
+
+# Production
+electric_furnace:
+  inputs:
+    steel: 15
+    stone_brick: 10
+    advanced_circuit: 5
+  time: 10
+assembly_1:
+  inputs:
+    iron: 9
+    gear: 5
+    circuit: 3
+assembly_2:
+  inputs:
+    assembly_1: 1
+    iron: 9
+    gear: 5
+    circuit: 3
+assembly_3:
+  inputs:
+    assembly_2: 1
+    speed_mod: 4
+speed_mod:
+  inputs:
+    circuit: 5
+    advanced_circuit: 5
+  time: 30
+speed_mod_2:
+  inputs:
+    speed_mod: 4
+    advanced_circuit: 4
+    processing_unit: 5
+  time: 60
+speed_mod_3:
+  inputs:
+    speed_mod_2: 4
+    alient_artifact: 1
+    advanced_circuit: 5
+    processing_unit: 5
+  time: 120
+
+efficiency_mod:
+  inputs:
+    circuit: 5
+    advanced_circuit: 5
+  time: 30
+efficiency_mod_2:
+  inputs:
+    efficiency_mod: 4
+    advanced_circuit: 4
+    processing_unit: 5
+  time: 60
+efficiency_mod_3:
+  inputs:
+    efficiency_mod_2: 4
+    alient_artifact: 1
+    advanced_circuit: 5
+    processing_unit: 5
+  time: 120
+
+productivity_mod:
+  inputs:
+    circuit: 5
+    advanced_circuit: 5
+  time: 30
+productivity_mod_2:
+  inputs:
+    productivity_mod: 4
+    advanced_circuit: 4
+    processing_unit: 5
+  time: 60
+productivity_mod_3:
+  inputs:
+    productivity_mod_2: 4
+    alient_artifact: 1
+    advanced_circuit: 5
+    processing_unit: 5
+  time: 120
+
+# Combat
+laser_turret:
+  inputs:
+    steel: 5
+    circuit: 5
+    battery: 3
+  time: 10
