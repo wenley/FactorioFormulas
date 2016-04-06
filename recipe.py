@@ -8,7 +8,7 @@ class RecipeBuilder(object):
   def __init__(self, arg=None):
     self.name = None
     self.inputs = None
-    self.time = 0
+    self.ticks = 0
     self.amount = 0
     self.buildings = 1
 
@@ -17,7 +17,7 @@ class RecipeBuilder(object):
 
       self.name = recipe.name
       self.inputs = recipe.inputs
-      self.time = recipe.time
+      self.ticks = recipe.ticks
       self.amount = recipe.amount
       self.buildings = recipe.buildings
     elif isinstance(arg, basestring):
@@ -29,8 +29,8 @@ class RecipeBuilder(object):
   def with_inputs(self, inputs):
     self.inputs = inputs
     return self
-  def with_time(self, time):
-    self.time = time
+  def with_ticks(self, ticks):
+    self.ticks = ticks
     return self
   def with_amount(self, amount):
     self.amount = amount
@@ -42,15 +42,15 @@ class RecipeBuilder(object):
   def build(self):
     return Recipe(self.name,
         self.inputs,
-        self.time,
+        self.ticks,
         self.amount,
         self.buildings)
 
 class Recipe(object):
-  def __init__(self, name, inputs, time, amount, buildings=1):
+  def __init__(self, name, inputs, ticks, amount, buildings=1):
     self.name = name
     self.inputs = inputs
-    self.time = time
+    self.ticks = ticks
     self.amount = amount
     self.buildings = buildings
 
@@ -58,7 +58,7 @@ class Recipe(object):
     inputs = ", ".join("%d %s" % (amount, item) for item, amount in self.inputs.iteritems())
 
     return "%s %s = %s + %s ticks across %s buildings" % \
-        (format_amount(self.amount), self.name, inputs, self.time, format_amount(self.buildings))
+        (format_amount(self.amount), self.name, inputs, self.ticks, format_amount(self.buildings))
 
   def __mul__(self, num):
     if not isinstance(num, numbers.Number):
@@ -68,19 +68,19 @@ class Recipe(object):
 
     return RecipeBuilder(self.name) \
         .with_inputs({ item: amount * scale for item, amount in self.inputs.iteritems() }) \
-        .with_time(self.time) \
+        .with_ticks(self.ticks) \
         .with_amount(self.amount * scale) \
         .with_buildings(self.buildings * scale) \
         .build()
 
-  def scale_ticks(self, new_time):
+  def scale_ticks(self, new_ticks):
     '''
     Adjust building count to produce same output given the new time constraint.
     '''
-    scale = float(self.time) / new_time
+    scale = float(self.ticks) / new_ticks
 
     return RecipeBuilder(self) \
-        .with_time(new_time) \
+        .with_ticks(new_ticks) \
         .with_buildings(self.buildings * scale) \
         .build()
 
@@ -98,7 +98,7 @@ def load_recipes_from_data(data):
   def load(data):
     return Recipe(data['name'],
         data['inputs'],
-        data.get('time', 1),
+        data.get('ticks', 1),
         data.get('amount', 1))
 
   return [load(d) for d in data]

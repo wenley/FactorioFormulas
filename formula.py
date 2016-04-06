@@ -7,10 +7,10 @@ from recipe import Recipe, recipe_for_item
 from util import is_raw, format_amount
 
 class Formula(object):
-  def __init__(self, item, amount=1, time=1):
+  def __init__(self, item, amount=1, ticks=1):
     self.machines = defaultdict(lambda: 0)
     self.raws = defaultdict(lambda: 0)
-    self.time = time
+    self.ticks = ticks
 
     self.start_item = item
     self.start_amount = amount
@@ -21,9 +21,9 @@ class Formula(object):
 
   def __repr__(self):
     if not self.expanded:
-      return "(Unexpanded) %d %s in %d ticks" % (self.start_amount, self.start_item, self.time)
+      return "(Unexpanded) %d %s in %d ticks" % (self.start_amount, self.start_item, self.ticks)
 
-    output = ["For %d %s in %d ticks:" % (self.start_amount, self.start_item, self.time)]
+    output = ["For %d %s in %d ticks:" % (self.start_amount, self.start_item, self.ticks)]
 
     if len(self.machines) > 0:
       machines = '\n'.join("%s %s" % (format_amount(amount), item) for item, amount in self.machines.iteritems())
@@ -57,7 +57,7 @@ class Formula(object):
         return self.expand()
 
       # Adjust building count based on the time allotted
-      recipe = recipe.scale_ticks(self.time)
+      recipe = recipe.scale_ticks(self.ticks)
 
       # If the recipe builds more than needed,
       # scaling_factor should be < 1

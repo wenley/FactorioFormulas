@@ -1,7 +1,7 @@
 # Format:
 # inputs: nested hash of item_name: amount
 # amount: amount produced; defaults to 1
-# time: ticks to make (1 tick = 0.5 sec); defaults to 1
+# ticks: time to make (1 tick = 0.5 sec); defaults to 1
 
 # Intermediates
 -
@@ -21,7 +21,7 @@
   name: steel
   inputs:
     iron: 5
-  time: 17
+  ticks: 17
 -
   name: circuit
   inputs:
@@ -33,14 +33,14 @@
     plastic: 2
     circuit: 2
     coil: 4
-  time: 16
+  ticks: 16
 -
   name: processing_unit
   inputs:
     circuit: 20
     advanced_circuit: 2
     acid: 0.5
-  time: 30
+  ticks: 30
 
 # Placeholder to indicate number of pumps and amount of water consumed separately
 # One "water building" is a pump
@@ -58,14 +58,14 @@
     pipe: 2
     steel: 1
     gear: 1
-  time: 40
+  ticks: 40
 -
   name: electric_engine
   inputs:
     engine: 1
     circuit: 2
     lube: 2
-  time: 40
+  ticks: 40
 -
   name: robo_frame
   inputs:
@@ -73,7 +73,7 @@
     steel: 1
     circuit: 3
     battery: 2
-  time: 40
+  ticks: 40
 -
   name: logistic_robot
   inputs:
@@ -90,7 +90,7 @@
     steel: 45
     gear: 45
     advanced_circuit: 45
-  time: 30
+  ticks: 30
 
 # Science Packs
 -
@@ -98,13 +98,13 @@
   inputs:
     copper: 1
     gear: 1
-  time: 10
+  ticks: 10
 -
   name: science_2
   inputs:
     transporter: 1
     inserter: 1
-  time: 12
+  ticks: 12
 -
   name: science_3
   inputs:
@@ -112,7 +112,7 @@
     steel: 1
     advanced_circuit: 1
     battery: 1
-  time: 24
+  ticks: 24
 
 # Petroleum Products
 -
@@ -121,14 +121,14 @@
     water: 3
     pgas: 3
   amount: 2
-  time: 2
+  ticks: 2
 -
   name: acid
   inputs:
     sulfur: 5
     water: 10
     iron: 1
-  time: 2
+  ticks: 2
   amount: 5
 -
   name: battery
@@ -136,13 +136,13 @@
     acid: 2
     iron: 1
     copper: 1
-  time: 10
+  ticks: 10
 -
   name: plastic
   inputs:
     coal: 1
     pgas: 3
-  time: 2
+  ticks: 2
   amount: 2
 
 # Logistics
@@ -207,7 +207,7 @@
     steel: 15
     stone_brick: 10
     advanced_circuit: 5
-  time: 10
+  ticks: 10
 -
   name: assembly_1
   inputs:
@@ -231,14 +231,14 @@
   inputs:
     circuit: 5
     advanced_circuit: 5
-  time: 30
+  ticks: 30
 -
   name: speed_mod_2
   inputs:
     speed_mod: 4
     advanced_circuit: 4
     processing_unit: 5
-  time: 60
+  ticks: 60
 -
   name: speed_mod_3
   inputs:
@@ -246,21 +246,21 @@
     alient_artifact: 1
     advanced_circuit: 5
     processing_unit: 5
-  time: 120
+  ticks: 120
 
 -
   name: efficiency_mod
   inputs:
     circuit: 5
     advanced_circuit: 5
-  time: 30
+  ticks: 30
 -
   name: efficiency_mod_2
   inputs:
     efficiency_mod: 4
     advanced_circuit: 4
     processing_unit: 5
-  time: 60
+  ticks: 60
 -
   name: efficiency_mod_3
   inputs:
@@ -268,21 +268,21 @@
     alient_artifact: 1
     advanced_circuit: 5
     processing_unit: 5
-  time: 120
+  ticks: 120
 
 -
   name: productivity_mod
   inputs:
     circuit: 5
     advanced_circuit: 5
-  time: 30
+  ticks: 30
 -
   name: productivity_mod_2
   inputs:
     productivity_mod: 4
     advanced_circuit: 4
     processing_unit: 5
-  time: 60
+  ticks: 60
 -
   name: productivity_mod_3
   inputs:
@@ -290,7 +290,7 @@
     alient_artifact: 1
     advanced_circuit: 5
     processing_unit: 5
-  time: 120
+  ticks: 120
 
 # Combat
 -
@@ -299,4 +299,4 @@
     steel: 5
     circuit: 5
     battery: 3
-  time: 10
+  ticks: 10
