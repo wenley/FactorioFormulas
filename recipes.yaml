@@ -336,6 +336,41 @@
 
 # Combat
 -
+  name: gun_turret
+  tags: [combat]
+  inputs:
+    iron: 20
+    copper: 10
+    gear: 10
+  ticks: 20
+-
+  name: regular_magazine
+  tags: [combat]
+  inputs:
+    iron: 2
+  ticks: 4
+-
+  name: piercing_magazine
+  tags: [combat]
+  inputs:
+    copper: 5
+    steel: 1
+  ticks: 6
+-
+  name: regular_shells
+  tags: [combat]
+  inputs:
+    copper: 2
+    iron: 2
+  ticks: 6
+-
+  name: piercing_shells
+  tags: [combat]
+  inputs:
+    copper: 2
+    steel: 2
+  ticks: 16
+-
   name: laser_turret
   tags: [combat, electronic]
   inputs:
