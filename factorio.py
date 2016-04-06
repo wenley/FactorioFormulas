@@ -21,7 +21,7 @@ parser.add_option("-a", "--amount", type="float", dest="amount", default=1,
 parser.add_option("-t", "--ticks", type="float", dest="ticks", default=None,
     help="Number of ticks allowed per batch. 1 tick = 0.5 sec. Defaults to the recipe time.")
 
-parser.add_option('-v', '--verbose', action="store_true", dest="debug",
+parser.add_option('-v', '--verbose', action="store_true", dest="verbose",
     help="Turn on logging.")
 
 
@@ -31,7 +31,12 @@ if __name__ == '__main__':
   if options.list_recipes:
     for recipe in recipes:
       if all(map(lambda t: t in recipe.tags, options.tags)):
-        print recipe.name, "[%s]" % (",".join(recipe.tags - options.tags),)
+        line = [recipe.name]
+
+        remaining_tags = set(recipe.tags) - set(options.tags)
+        if remaining_tags and options.verbose:
+          line.append("[%s]" % (",".join(remaining_tags),))
+        print " ".join(line)
   elif options.recipe_requested is not None:
     recipe = recipe_for_item(options.recipe_requested)
 
