@@ -139,3 +139,5 @@ Raws:
 * Fill out `recipes.yaml` to be complete
 * Account for different build rates of assemblers
 * Account for using different modules in buildings (?)
+* D3 Graph to show flow of items through buildings listed in a build
+  - Allow splitting a block of buildings (circuits) into two nodes for building organization
