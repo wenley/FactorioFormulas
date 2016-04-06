@@ -69,6 +69,7 @@ coil [intermediate]
 pipe
 steel [intermediate]
 circuit [intermediate,electronic]
+...
 ```
 
 Drilling down into a specific tag:
@@ -80,6 +81,7 @@ piercing_magazine
 regular_shells
 piercing_shells
 laser_turret [electronic]
+...
 ```
 
 
