@@ -37,9 +37,8 @@ if __name__ == '__main__':
     else:
       print "Could not find recipe with name %s" % (options.recipe_requested,)
   elif options.build_target is not None:
-    if options.ticks is None:
-      options.ticks = recipe_for_item(options.build_target).ticks
+    ticks = options.ticks or recipe_for_item(options.build_target).ticks
 
-    formula = Formula(options.build_target, amount=options.amount, ticks=options.ticks)
+    formula = Formula(options.build_target, amount=options.amount, ticks=ticks)
     formula.expand()
     print formula
