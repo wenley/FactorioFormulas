@@ -7,6 +7,7 @@ from util import format_amount
 class RecipeBuilder(object):
   def __init__(self, arg=None):
     self.name = None
+    self.tags = None
     self.inputs = None
     self.ticks = 0
     self.amount = 0
@@ -16,6 +17,7 @@ class RecipeBuilder(object):
       recipe = arg
 
       self.name = recipe.name
+      self.tags = recipe.tags
       self.inputs = recipe.inputs
       self.ticks = recipe.ticks
       self.amount = recipe.amount
@@ -25,6 +27,9 @@ class RecipeBuilder(object):
 
   def with_name(self, name):
     self.name = name
+    return self
+  def with_tags(self, tags):
+    self.tags = tags
     return self
   def with_inputs(self, inputs):
     self.inputs = inputs
@@ -41,14 +46,16 @@ class RecipeBuilder(object):
 
   def build(self):
     return Recipe(self.name,
+        self.tags,
         self.inputs,
         self.ticks,
         self.amount,
         self.buildings)
 
 class Recipe(object):
-  def __init__(self, name, inputs, ticks, amount, buildings=1):
+  def __init__(self, name, tags, inputs, ticks, amount, buildings=1):
     self.name = name
+    self.tags = tags
     self.inputs = inputs
     self.ticks = ticks
     self.amount = amount
@@ -66,9 +73,8 @@ class Recipe(object):
 
     scale = float(num)
 
-    return RecipeBuilder(self.name) \
+    return RecipeBuilder(self) \
         .with_inputs({ item: amount * scale for item, amount in self.inputs.iteritems() }) \
-        .with_ticks(self.ticks) \
         .with_amount(self.amount * scale) \
         .with_buildings(self.buildings * scale) \
         .build()
@@ -91,6 +97,7 @@ def load_data(file_name='recipes.yaml'):
 def load_recipes_from_data(data):
   def load(data):
     return Recipe(data['name'],
+        data.get('tags', []),
         data['inputs'],
         data.get('ticks', 1),
         data.get('amount', 1))

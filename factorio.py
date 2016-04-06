@@ -7,7 +7,9 @@ from formula import Formula
 parser = OptionParser()
 
 parser.add_option('-l', '--list', action="store_true", dest="list_recipes",
-    help="Print a list of all known recipes.")
+    help="Print a list of recipes.")
+parser.add_option('--tag', action="append", type="string", dest="tags", default=[],
+    help="Only print recipes with the specified tag. Can be listed multiple times.")
 
 parser.add_option("-r", "--recipe", type="string", dest="recipe_requested",
     help="Item whose recipe to recite.")
@@ -28,7 +30,8 @@ if __name__ == '__main__':
 
   if options.list_recipes:
     for recipe in recipes:
-      print recipe.name
+      if all(map(lambda t: t in recipe.tags, options.tags)):
+        print recipe.name, "[%s]" % (",".join(recipe.tags - options.tags),)
   elif options.recipe_requested is not None:
     recipe = recipe_for_item(options.recipe_requested)
 
