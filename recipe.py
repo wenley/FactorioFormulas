@@ -84,12 +84,6 @@ class Recipe(object):
         .with_buildings(self.buildings * scale) \
         .build()
 
-  def normalize(self):
-    '''
-    Adjust the recipe to use an integer number of buildings.
-    '''
-    pass
-
 def load_data(file_name='recipes.yaml'):
   with open(file_name, 'r') as f:
     return yaml.safe_load(f)
