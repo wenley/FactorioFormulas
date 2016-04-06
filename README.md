@@ -20,31 +20,67 @@ Usage: factorio.py [options]
 
 Options:
   -h, --help            show this help message and exit
+  -l, --list            Print a list of recipes.
+  -v, --verbose         Turn on listing tags.
+  --tag=TAGS            Only print recipes with the specified tag. Can be
+                        listed multiple times.
   -r RECIPE_REQUESTED, --recipe=RECIPE_REQUESTED
                         Item whose recipe to recite.
   -b BUILD_TARGET, --build=BUILD_TARGET
                         Item to determine build for.
   -a AMOUNT, --amount=AMOUNT
                         Amount of the item being built. [default 1].
-  -t TICKS, --time=TICKS
-                        Number of ticks allowed per batch. Defaults to the
-                        recipe time.
-  -v, --verbose         Turn on logging.
+  -t TICKS, --ticks=TICKS
+                        Number of ticks allowed per batch. 1 tick = 0.5 sec.
+                        Defaults to the recipe time.
 ```
 
 ### Examples
 
+#### Listing recipe names
+
+Basic
 ```
 $ python factorio.py -l
-
+gear
+coil
+pipe
+steel
 ...
 ```
+
+With associated tags (determined by me):
+```
+$ python factorio.py -l -v
+gear [intermediate]
+coil [intermediate]
+pipe
+steel [intermediate]
+circuit [intermediate,electronic]
+```
+
+Drilling down into a specific tag:
+```
+$ python factorio.py -l --tag combat -v
+gun_turret
+regular_magazine
+piercing_magazine
+regular_shells
+piercing_shells
+laser_turret [electronic]
+```
+
+
+#### Explain a recipe
 
 ```
 $ python factorio.py -r inserter
 1 inserter = 1 iron, 1 circuit, 1 gear + 1 ticks across 1 buildings
 ```
 
+#### Printing a full build
+
+Basic
 ```
 $ python factorio.py -b inserter
 For 1 inserter in 1 ticks:
@@ -58,6 +94,7 @@ Raws:
 4 iron
 ```
 
+Specifying an amount
 ```
 $ python factorio.py -b inserter -a 4
 For 4 inserter in 1 ticks:
@@ -71,6 +108,7 @@ Raws:
 16 iron
 ```
 
+Specifying an amount and specific number of ticks:
 ```
 $ python factorio.py -b inserter -a 4 -t 2
 For 4 inserter in 2 ticks:
