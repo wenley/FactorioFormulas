@@ -95,13 +95,13 @@ def load_data(file_name='recipes.yaml'):
     return yaml.safe_load(f)
 
 def load_recipes_from_data(data):
-  def recipe_from_name_and_factors(name, factors):
-    return Recipe(name,
-        factors['inputs'],
-        factors.get('time', 1),
-        factors.get('amount', 1))
+  def load(data):
+    return Recipe(data['name'],
+        data['inputs'],
+        data.get('time', 1),
+        data.get('amount', 1))
 
-  return [recipe_from_name_and_factors(name, factors) for name, factors in data.iteritems()]
+  return [load(d) for d in data]
 
 recipes = load_recipes_from_data(load_data())
 def recipe_for_item(item_name):
