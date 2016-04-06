@@ -10,7 +10,7 @@
   inputs:
     iron: 2
 -
-  name: coil
+  name: cable
   tags: [intermediate]
   inputs:
     copper: 1
@@ -30,14 +30,14 @@
   tags: [intermediate, electronic]
   inputs:
     iron: 1
-    coil: 3
+    cable: 3
 -
   name: advanced_circuit
   tags: [intermediate, electronic]
   inputs:
     plastic: 2
     circuit: 2
-    coil: 4
+    cable: 4
   ticks: 16
 -
   name: processing_unit
