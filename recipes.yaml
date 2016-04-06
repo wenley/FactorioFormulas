@@ -6,10 +6,12 @@
 # Intermediates
 -
   name: gear
+  tags: [intermediate]
   inputs:
     iron: 2
 -
   name: coil
+  tags: [intermediate]
   inputs:
     copper: 1
   amount: 2
@@ -19,16 +21,19 @@
     iron: 1
 -
   name: steel
+  tags: [intermediate]
   inputs:
     iron: 5
   ticks: 17
 -
   name: circuit
+  tags: [intermediate, electronic]
   inputs:
     iron: 1
     coil: 3
 -
   name: advanced_circuit
+  tags: [intermediate, electronic]
   inputs:
     plastic: 2
     circuit: 2
@@ -36,6 +41,7 @@
   ticks: 16
 -
   name: processing_unit
+  tags: [intermediate, electronic]
   inputs:
     circuit: 20
     advanced_circuit: 2
@@ -54,6 +60,7 @@
 # Engines
 -
   name: engine
+  tags: [intermediate, robotics]
   inputs:
     pipe: 2
     steel: 1
@@ -61,6 +68,7 @@
   ticks: 40
 -
   name: electric_engine
+  tags: [intermediate, robotics]
   inputs:
     engine: 1
     circuit: 2
@@ -68,6 +76,7 @@
   ticks: 40
 -
   name: robo_frame
+  tags: [intermediate, robotics]
   inputs:
     electric_engine: 1
     steel: 1
@@ -76,16 +85,19 @@
   ticks: 40
 -
   name: logistic_robot
+  tags: [logistics, robotics, network]
   inputs:
     robo_frame: 1
     advanced_circuit: 2
 -
   name: construction_robot
+  tags: [logistics, robotics, network]
   inputs:
     robo_frame: 1
     advanced_circuit: 2
 -
   name: roboport
+  tags: [logistics, robotics, network]
   inputs:
     steel: 45
     gear: 45
@@ -95,18 +107,21 @@
 # Science Packs
 -
   name: science_1
+  tags: [intermediate, science]
   inputs:
     copper: 1
     gear: 1
   ticks: 10
 -
   name: science_2
+  tags: [intermediate, science]
   inputs:
     transporter: 1
     inserter: 1
   ticks: 12
 -
   name: science_3
+  tags: [intermediate, science]
   inputs:
     smart_inserter: 1
     steel: 1
@@ -117,6 +132,7 @@
 # Petroleum Products
 -
   name: sulfur
+  tags: [intermediate, petroleum]
   inputs:
     water: 3
     pgas: 3
@@ -124,6 +140,7 @@
   ticks: 2
 -
   name: acid
+  tags: [intermediate, petroleum]
   inputs:
     sulfur: 5
     water: 10
@@ -132,6 +149,7 @@
   amount: 5
 -
   name: battery
+  tags: [intermediate, petroleum, electronic]
   inputs:
     acid: 2
     iron: 1
@@ -139,6 +157,7 @@
   ticks: 10
 -
   name: plastic
+  tags: [intermediate, petroleum]
   inputs:
     coal: 1
     pgas: 3
@@ -148,23 +167,27 @@
 # Logistics
 -
   name: transporter
+  tags: [logistics]
   inputs:
     iron: 1
     gear: 1
 -
   name: inserter
+  tags: [logistics]
   inputs:
     iron: 1
     circuit: 1
     gear: 1
 -
   name: fast_inserter
+  tags: [logistics]
   inputs:
     inserter: 1
     iron: 2
     circuit: 2
 -
   name: smart_inserter
+  tags: [logistics]
   inputs:
     fast_inserter: 1
     circuit: 4
@@ -172,30 +195,36 @@
 # Storage
 -
   name: steel_chest
+  tags: [logistics, storage]
   inputs:
     steel: 8
 -
   name: smart_chest
+  tags: [logistics, storage, network]
   inputs:
     steel_chest: 1
     circuit: 3
 -
   name: active_provider_chest
+  tags: [logistics, storage, network]
   inputs:
     smart_chest: 1
     advanced_circuit: 1
 -
   name: passive_provider_chest
+  tags: [logistics, storage, network]
   inputs:
     smart_chest: 1
     advanced_circuit: 1
 -
   name: requester_chest
+  tags: [logistics, storage, network]
   inputs:
     smart_chest: 1
     advanced_circuit: 1
 -
   name: storage_chest
+  tags: [logistics, storage, network]
   inputs:
     smart_chest: 1
     advanced_circuit: 1
@@ -203,6 +232,7 @@
 # Production
 -
   name: electric_furnace
+  tags: [production]
   inputs:
     steel: 15
     stone_brick: 10
@@ -210,12 +240,14 @@
   ticks: 10
 -
   name: assembly_1
+  tags: [production]
   inputs:
     iron: 9
     gear: 5
     circuit: 3
 -
   name: assembly_2
+  tags: [production]
   inputs:
     assembly_1: 1
     iron: 9
@@ -223,17 +255,20 @@
     circuit: 3
 -
   name: assembly_3
+  tags: [production]
   inputs:
     assembly_2: 1
     speed_mod: 4
 -
   name: speed_mod
+  tags: [production, module]
   inputs:
     circuit: 5
     advanced_circuit: 5
   ticks: 30
 -
   name: speed_mod_2
+  tags: [production, module]
   inputs:
     speed_mod: 4
     advanced_circuit: 4
@@ -241,6 +276,7 @@
   ticks: 60
 -
   name: speed_mod_3
+  tags: [production, module]
   inputs:
     speed_mod_2: 4
     alient_artifact: 1
@@ -250,12 +286,14 @@
 
 -
   name: efficiency_mod
+  tags: [production, module]
   inputs:
     circuit: 5
     advanced_circuit: 5
   ticks: 30
 -
   name: efficiency_mod_2
+  tags: [production, module]
   inputs:
     efficiency_mod: 4
     advanced_circuit: 4
@@ -263,6 +301,7 @@
   ticks: 60
 -
   name: efficiency_mod_3
+  tags: [production, module]
   inputs:
     efficiency_mod_2: 4
     alient_artifact: 1
@@ -272,12 +311,14 @@
 
 -
   name: productivity_mod
+  tags: [production, module]
   inputs:
     circuit: 5
     advanced_circuit: 5
   ticks: 30
 -
   name: productivity_mod_2
+  tags: [production, module]
   inputs:
     productivity_mod: 4
     advanced_circuit: 4
@@ -285,6 +326,7 @@
   ticks: 60
 -
   name: productivity_mod_3
+  tags: [production, module]
   inputs:
     productivity_mod_2: 4
     alient_artifact: 1
@@ -295,8 +337,9 @@
 # Combat
 -
   name: laser_turret
+  tags: [combat, electronic]
   inputs:
-    steel: 5
-    circuit: 5
-    battery: 3
-  ticks: 10
+    steel: 20
+    circuit: 20
+    battery: 12
+  ticks: 40
