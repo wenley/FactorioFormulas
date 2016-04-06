@@ -3,6 +3,16 @@
 
 A small utility to recall recipes for items and also give the building set, raw materials, and time to craft a certain number of items.
 
+## Disclaimer
+
+I originally built this to be useful to me and it certainly shows.
+`recipes.yaml` is woefully incomplete
+(especially compared to [this amazing spreadsheet](https://docs.google.com/spreadsheets/d/1GKzEAf2IOGB5D2TCdX3tgisJmD1yikzQRJ31_Rxz7FM/edit#gid=0)),
+but includes the recipes I've used and planned with most often.
+The tags in it are also based on my mental organization of the different items.
+
+I whole-heartedly welcome pull-requests, and please use the `recipes.yaml`. I hope it proves reusable in other analyses and tools.
+
 ## Terminology
 
 * **Item** = A thing that can occupy an inventory slot or be consumed. Examples: Iron Gears, Copper Coil, Sulfuric Acid.
@@ -123,3 +133,9 @@ Raws:
 6 copper
 16 iron
 ```
+
+## TODO
+
+* Fill out `recipes.yaml` to be complete
+* Account for different build rates of assemblers
+* Account for using different modules in buildings (?)
