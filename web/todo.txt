@@ -1,0 +1,12 @@
+- Make nodes smaller? given shrunk the height of each link. Maybe an overall scaling issue?
+- Add more padding to each node
+- Floating numbers at links based on throughput
+- Prettier font
+- Fixed colors for nodes and links based on resource being transmitted
+
+- Enable splitting + merging nodes together in UI of same resource
+- Merging different resource nodes together (utilize back-end model of a ResourceFlow)
+
+Ambitious:
+- Right now, expect graph data to be driven by Python script
+- Eventually can be all computed, interactive on front-end
