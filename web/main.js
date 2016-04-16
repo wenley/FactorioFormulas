@@ -3,14 +3,13 @@ var width = 1024;
 var height = 600;
 
 var formatNumber = d3.format(",.0f"),
-    format = function(d) { return formatNumber(d) + " TWh"; },
     color = d3.scale.category20();
 
 window.onload = function() {
   var factorio = d3.sankey()
   .size([width, height])
   .nodeWidth(15)
-  .nodePadding(10)
+  .nodePadding(200)
 
   var svg = d3.select("#graph").append("svg")
   .attr("width", width)
@@ -38,7 +37,21 @@ window.onload = function() {
         .sort(function(a, b) { return b.dy - a.dy; });
 
     link.append("title")
-        .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+        .text(function(d) { return d.value + " " + d.source.name; });
+
+    // Find graphical center for a link
+    centerForLink = function(link) {
+      var x = (link.target.x - link.source.x) / 2;
+      var y = ((link.source.y + link.sy) - (link.target.y + link.ty)) / 2;
+      return { "x": x, "y": y };
+    };
+
+    // Add text to each ResourceFlow
+    // link.append("text")
+    //     .attr("x", function(d) { return centerForLink(d).x; })
+    //     .attr("y", function(d) { return centerForLink(d).y; })
+    //     .attr("text-anchor", "middle")
+    //     .text(function(d) { return d.value + " " + d.source.name; });
 
     var node = svg.append("g").selectAll(".node")
         .data(data.nodes)
@@ -50,14 +63,16 @@ window.onload = function() {
         .on("dragstart", function() { this.parentNode.appendChild(this); })
         .on("drag", dragmove));
 
+    // Draw boxes for each node
     node.append("rect")
         .attr("height", function(d) { return d.dy; })
         .attr("width", factorio.nodeWidth())
         .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
         .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
-        .text(function(d) { return d.name + "\n" + format(d.value); });
+        .text(function(d) { return d.name; });
 
+    // Add text next to Building node
     node.append("text")
         .attr("x", -6)
         .attr("y", function(d) { return d.dy / 2; })
@@ -68,6 +83,43 @@ window.onload = function() {
       .filter(function(d) { return d.x < width / 2; })
         .attr("x", 6 + factorio.nodeWidth())
         .attr("text-anchor", "start");
+
+    // Add link value annotations
+    data.nodes.forEach(function(node) {
+      console.log(node);
+
+      svg_node = svg.selectAll(".node")
+        .filter(function(node_d) { return node_d.name == node.name; });
+      console.log(svg_node)
+
+      var addSourceLinkAnnotation = function(link_d) {
+        svg_node.append("text")
+          .attr("x", 20 + factorio.nodeWidth())
+          .attr("y", link_d.sy + link_d.dy / 2)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "start")
+          .text(link_d.value + " " + link_d.source.name)
+          .attr("transform", null);
+      };
+      var addTargetLinkAnnotation = function(link_d) {
+        svg_node.append("text")
+          .attr("x", -20)
+          .attr("y", link_d.ty + link_d.dy / 2)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "end")
+          .text(link_d.value + " " + link_d.source.name)
+          .attr("transform", null);
+      };
+
+      // Grab link-path SVG objects whose source is the node
+      svg.selectAll(".link")
+        .filter(function(link_d) { return link_d.source.name == node.name; })
+        .each(addSourceLinkAnnotation);
+
+      svg.selectAll(".link")
+        .filter(function(link_d) { return link_d.target.name == node.name; })
+        .each(addTargetLinkAnnotation);
+    });
 
     function dragmove(d) {
       d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
