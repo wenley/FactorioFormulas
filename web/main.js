@@ -46,13 +46,6 @@ window.onload = function() {
       return { "x": x, "y": y };
     };
 
-    // Add text to each ResourceFlow
-    // link.append("text")
-    //     .attr("x", function(d) { return centerForLink(d).x; })
-    //     .attr("y", function(d) { return centerForLink(d).y; })
-    //     .attr("text-anchor", "middle")
-    //     .text(function(d) { return d.value + " " + d.source.name; });
-
     var node = svg.append("g").selectAll(".node")
         .data(data.nodes)
       .enter().append("g")
@@ -73,43 +66,40 @@ window.onload = function() {
         .text(function(d) { return d.name; });
 
     // Add text next to Building node
-    node.append("text")
-        .attr("x", -6)
-        .attr("y", function(d) { return d.dy / 2; })
-        .attr("dy", ".35em")
-        .attr("text-anchor", "end")
-        .attr("transform", null)
-        .text(function(d) { return d.name; })
-      .filter(function(d) { return d.x < width / 2; })
-        .attr("x", 6 + factorio.nodeWidth())
-        .attr("text-anchor", "start");
+    // node.append("text")
+    //     .attr("x", -6)
+    //     .attr("y", function(d) { return d.dy / 2; })
+    //     .attr("dy", ".35em")
+    //     .attr("text-anchor", "end")
+    //     .attr("transform", null)
+    //     .text(function(d) { return d.name; })
+    //   .filter(function(d) { return d.x < width / 2; })
+    //     .attr("x", 6 + factorio.nodeWidth())
+    //     .attr("text-anchor", "start");
 
     // Add link value annotations
     data.nodes.forEach(function(node) {
-      console.log(node);
-
       svg_node = svg.selectAll(".node")
         .filter(function(node_d) { return node_d.name == node.name; });
-      console.log(svg_node)
 
-      var addSourceLinkAnnotation = function(link_d) {
-        svg_node.append("text")
-          .attr("x", 20 + factorio.nodeWidth())
-          .attr("y", link_d.sy + link_d.dy / 2)
-          .attr("dy", ".35em")
-          .attr("text-anchor", "start")
-          .text(link_d.value + " " + link_d.source.name)
-          .attr("transform", null);
-      };
-      var addTargetLinkAnnotation = function(link_d) {
-        svg_node.append("text")
-          .attr("x", -20)
-          .attr("y", link_d.ty + link_d.dy / 2)
-          .attr("dy", ".35em")
-          .attr("text-anchor", "end")
-          .text(link_d.value + " " + link_d.source.name)
-          .attr("transform", null);
-      };
+      var addLinkAnnocation = function(offset, text_anchoring) {
+        return function(link_d) {
+          var offsets = offset(link_d);
+          svg_node.append("text")
+            .attr("x", offsets.x)
+            .attr("y", offsets.y)
+            .attr("dy", ".35em")
+            .attr("text-anchor", text_anchoring)
+            .text(link_d.value + " " + link_d.source.name)
+            .attr("transform", null);
+        };
+      }
+      var addSourceLinkAnnotation = addLinkAnnocation(function (link_d) {
+        return { "x": 20 + factorio.nodeWidth(), "y": link_d.sy + link_d.dy / 2 };
+      }, "start");
+      var addTargetLinkAnnotation = addLinkAnnocation(function (link_d) {
+        return { "x": -20, "y": link_d.ty + link_d.dy / 2 };
+      }, "end");
 
       // Grab link-path SVG objects whose source is the node
       svg.selectAll(".link")
